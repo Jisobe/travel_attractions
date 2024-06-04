@@ -19,14 +19,28 @@ def find_attraction(destination, interests):
     attractions_in_city = attractions[destination_index];
     attractions_with_interest = [];
 
-    print(attractions_in_city);
-
     for attraction in attractions_in_city:
         for interest in interests:
             if interest in attraction[1]:
                 attractions_with_interest.append(attraction[0]);
             
     return attractions_with_interest;
+
+def get_attractions_for_traveler(traveler):
+    traveler_name = traveler[0];
+    traveler_dest = traveler[1];
+    traveler_interests = traveler[2];
+
+    traveler_attractions = find_attraction(traveler_dest, traveler_interests);
+
+    output_string = f"Hi {traveler[0]}, we think you'll like these places around {traveler_dest}:\n"
+
+    for attraction in traveler_attractions:
+        output_string += "-" + attraction + "\n";
+    
+    # output_string += (str(attraction) for attraction in traveler_attractions);
+
+    return output_string;
 
 
 add_attraction("Los Angeles, USA", ['Venice Beach', ['beach']]);
@@ -41,5 +55,4 @@ add_attraction("São Paulo, Brazil", ["Pátio do Colégio", ["historical site"]]
 add_attraction("Cairo, Egypt", ["Pyramids of Giza", ["monument", "historical site"]])
 add_attraction("Cairo, Egypt", ["Egyptian Museum", ["museum"]])
 
-
-print(find_attraction("Los Angeles, USA", ['art']));
+print(get_attractions_for_traveler(['Dereck Smill', 'Paris, France', ['monument']]))
